@@ -1,19 +1,7 @@
-# app.py
-from flask import Flask, render_template, request, send_file
 import pandas as pd
+import streamlit as st
 
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/process', methods=['POST'])
-def process_excel():
-    # Get file from the form
-    uploaded_file = request.files['file']
-    output_filename = request.form['output_filename']
-
+def process_excel(uploaded_file, output_filename):
     # Read Excel file
     df = pd.read_excel(uploaded_file)
 
@@ -39,7 +27,18 @@ def process_excel():
     output_path = f"output/{output_filename}.xlsx"
     df.to_excel(output_path, index=False)
 
-    return send_file(output_path, as_attachment=True)
+    return output_path
+
+def main():
+    st.title("Excel Processor")
+
+    uploaded_file = st.file_uploader("Choose an Excel file", type=["xlsx"])
+    if uploaded_file is not None:
+        output_filename = st.text_input("Enter output filename (without extension):")
+
+        if st.button("Process"):
+            output_path = process_excel(uploaded_file, output_filename)
+            st.success(f"File processed successfully. [Download processed file]({output_path})")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    main()
