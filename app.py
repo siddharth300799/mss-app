@@ -5,6 +5,9 @@ import pandas as pd
 def process_excel(file):
     df = pd.read_excel(file)
 
+    # Placeholder for your data processing logic
+    # Replace this with your actual logic for renaming columns, adding new columns, etc.
+
     # Renaming columns
     df = df.rename(columns={'EMP CODE': 'Emp Code', 'NAME': 'Emp Name', 'DESIGNATION CODE': 'DesignationId', 'PF DAYS': 'Paid Days', 'ΤΟΤΑL': 'Total'})
 
@@ -42,7 +45,9 @@ def main():
         if st.button("Process and Download"):
             output_path = process_excel(uploaded_file)
             st.success("File processed successfully!")
-            st.markdown(f"Download your file [here]({output_path})")
+
+            # Provide a link to download the processed file
+            st.markdown(f"Download your file [here](sandbox:/mnt/data/{output_path})")
 
 if __name__ == "__main__":
     main()
