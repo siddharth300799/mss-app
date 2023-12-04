@@ -1,0 +1,21 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Processor</title>
+</head>
+<body>
+    <h1>Excel Processor</h1>
+    <form action="/process" method="post" enctype="multipart/form-data">
+        <label for="file">Choose Excel file:</label>
+        <input type="file" name="file" accept=".xls, .xlsx" required>
+        <br>
+        <label for="output_filename">Output File Name:</label>
+        <input type="text" name="output_filename" required>
+        <br>
+        <input type="submit" value="Process and Download">
+    </form>
+</body>
+</html>
